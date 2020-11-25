@@ -16,7 +16,7 @@ int main()
         printf("I - to adding interest rate to all open accounts\n");
         printf("P - to print all existed accounts and there value\n");
         printf("E - to close all accounts and exit\n");
-        scanf(" %c", &c);
+        scanf(" %c",&c);
         switch (c)
         {
         case 'O':
@@ -53,6 +53,7 @@ int main()
             stop = 0;
             break;
         default:
+            printf("you entered wrong letter please try again\n");
             break;
         }
     }

@@ -2,7 +2,7 @@
 static float accounts[2][3] = {0};
 void O()
 {
-    float income;
+    float income=-1;
     int available = -1;
     for (size_t i = 0; i < 3; i++)
     {
@@ -12,7 +12,7 @@ void O()
             scanf(" %f", &income);
             if (income < 0)
             {
-                printf("you can't enter negative number!\n");
+                printf("illegal number!\n");
                 return;
             }
             available = i + 901;
@@ -127,11 +127,11 @@ void P()
 void I()
 {
     float p, cal;
-    printf("enter the interest rate\n");
+    printf("enter the interest rate between -99 to 99\n");
     scanf(" %f", &p);
-    if (p < 0)
+    if (p < 99||p>99)
     {
-        printf("you can't enter negative number!\n");
+        printf("illegal number!\n");
         return;
     }
     for (size_t i = 0; i < 50; i++)
