@@ -1,117 +1,109 @@
 #include <stdio.h>
-static float accounts[2][3] = {0};
+static float accounts[2][50] = {0};
 void O()
 {
-    float income=-1;
+    float income = -1;
     int available = -1;
-    for (size_t i = 0; i < 3; i++)
+    for (size_t i = 0; i < 50; i++)
     {
         if (accounts[1][i] == 0)
         {
-            printf("enter amount above zero:\n");
+            printf("Please enter amount for deposit: ");
             scanf(" %f", &income);
             if (income < 0)
             {
-                printf("illegal number!\n");
+                printf("Failed to read the amount\n");
                 return;
             }
             available = i + 901;
             accounts[0][i] = income;
             accounts[1][i] = 1;
-            printf("congratulations! your new account number is:%d\n", available);
+            printf("New account number is: %d \n", available);
             break;
         }
     }
-    if (available == -1)
-        printf("sorry there's no available account\n");
 }
 void B(int num)
 {
     if (num < 900 || num > 951)
     {
-        printf("there's no such acoount\n");
+        printf("Failed to read the account number\n");
         return;
     }
     int num2 = num - 901;
     if (accounts[1][num2] == 0)
     {
-        printf("this acoount is not opened yet!\n");
+        printf("This account is closed\n");
         return;
     }
-    printf("your balance is:%0.2f\n", accounts[0][num2]);
+    printf("The balance of account number %d is: %0.2f\n", num, accounts[0][num2]);
 }
 void D(int num)
 {
     float d;
     if (num < 900 || num > 951)
     {
-        printf("there's no such acoount!\n");
+        printf("Failed to read the account number\n");
         return;
     }
     int num2 = num - 901;
     if (accounts[1][num2] == 0)
     {
-        printf("this acoount is not opened yet!\n");
+        printf("This account is closed\n");
         return;
     }
-    printf("enter amount to deposit:\n");
+    printf("Please enter amount for deposit: ");
     scanf(" %f", &d);
-    if (d < 0)
+    if (d >= 0)
     {
-        printf("you can't enter negative number!\n");
-        return;
+        accounts[0][num2] += d;
+        printf("your new balance is:%0.2f\n", accounts[0][num2]);
     }
-    accounts[0][num2] += d;
-    printf("your new balance is:%0.2f\n", accounts[0][num2]);
 }
 void W(int num)
 {
     float w;
     if (num < 900 || num > 951)
     {
-        printf("there's no such acoount!\n");
+        printf("Failed to read the account number\n");
         return;
     }
     int num2 = num - 901;
     if (accounts[1][num2] == 0)
     {
-        printf("this acoount is not opened yet!\n");
+        printf("This account is closed\n");
         return;
     }
-    printf("enter amount you want to withdraw:\n");
+    printf("Please enter the amount to withdraw: ");
     scanf(" %f", &w);
-    if (w < 0)
+    if (w >= 0)
     {
-        printf("you can't enter negative number!\n");
-        return;
+        if (accounts[0][num2] < w)
+        {
+            printf("Cannot withdraw more than the balance\n");
+            return;
+        }
+        accounts[0][num2] -= w;
+        printf("The new balance is: %0.2f\n", accounts[0][num2]);
     }
-    if (accounts[0][num2] < w)
-    {
-        printf("there's not enough money in your acoount\n");
-        return;
-    }
-    accounts[0][num2] -= w;
-    printf("your new balance is:%0.2f\n", accounts[0][num2]);
 }
 void C(int num)
 {
     if (num < 900 || num > 951)
     {
-        printf("there's no such acoount!\n");
+        printf("Failed to read the account number\n");
         return;
     }
     int num2 = num - 901;
-    if (accounts[1][num2] == 0)
+    if ((accounts[1][num2] == 0))
     {
-        printf("this acoount is already close!\n");
+        printf("This account is closed\n");
         return;
     }
     if (accounts[1][num2] == 1)
     {
         accounts[1][num2] = 0;
         accounts[0][num2] = 0;
-        printf("sucssesfuly closed!\n");
-        return;
     }
 }
 void P()
@@ -120,29 +112,30 @@ void P()
     {
         if (accounts[1][i] == 1)
         {
-            printf("account number:%lu with balance of:%0.2f\n", i + 901, accounts[0][i]);
+            printf("The balance of account number %lu is: %0.2f\n", i + 901, accounts[0][i]);
         }
     }
 }
 void I()
 {
     float p, cal;
-    printf("enter the interest rate between -99 to 99\n");
+    printf("Please enter interest rate: ");
     scanf(" %f", &p);
-    if (p < 99||p>99)
+    if (p > -99 && p < 99)
     {
-        printf("illegal number!\n");
-        return;
-    }
-    for (size_t i = 0; i < 50; i++)
-    {
-        if (accounts[1][i] == 1)
+        for (size_t i = 0; i < 50; i++)
         {
-            cal = (p * accounts[0][i]) / 100;
-            accounts[0][i] += cal;
+            if (accounts[1][i] == 1)
+            {
+                cal = (p * accounts[0][i]) / 100;
+                accounts[0][i] += cal;
+            }
         }
     }
-    printf("sucsessfuly done!\n");
+    else
+    {
+        printf("Failed to read the interest rate\n");
+    }
 }
 void E()
 {
@@ -154,5 +147,4 @@ void E()
             accounts[0][i] = 0;
         }
     }
-    printf("bye bye\n");
 }

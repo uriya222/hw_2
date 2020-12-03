@@ -4,41 +4,40 @@ int main()
 {
     char c;
     int tmp, stop = 1;
-    printf("Wellcom to GNB! what whoud you like to do today?\n");
     while (stop)
     {
-        printf("press:\n");
-        printf("O - to open new account\n");
-        printf("B - to find out your balance\n");
-        printf("D - to deposit money in your account\n");
-        printf("W - to withdraw money\n");
-        printf("C - to close your acoount\n");
-        printf("I - to adding interest rate to all open accounts\n");
-        printf("P - to print all existed accounts and there value\n");
-        printf("E - to close all accounts and exit\n");
-        scanf(" %c",&c);
+        printf("\nPlease choose a transaction type:\n");
+        printf(" O-Open Account\n");
+        printf(" B-Balance Inquiry\n");
+        printf(" D-Deposit\n");
+        printf(" W-Withdrawal\n");
+        printf(" C-Close Account\n");
+        printf(" I-Interest\n");
+        printf(" P-Print\n");
+        printf(" E-Exit\n");
+        while(scanf(" %c",&c)==' '){}
         switch (c)
         {
         case 'O':
             O();
             break;
         case 'B':
-            printf("enter account number:\n");
+            printf("Please enter account number: ");
             scanf("%d", &tmp);
             B(tmp);
             break;
         case 'D':
-            printf("enter account number:\n");
+            printf("Please enter account number: ");
             scanf("%d", &tmp);
             D(tmp);
             break;
         case 'W':
-            printf("enter account number:\n");
+            printf("Please enter account number: ");
             scanf("%d", &tmp);
             W(tmp);
             break;
         case 'C':
-            printf("enter account number:\n");
+            printf("Please enter account number: ");
             scanf("%d", &tmp);
             C(tmp);
             break;
@@ -53,7 +52,7 @@ int main()
             stop = 0;
             break;
         default:
-            printf("you entered wrong letter please try again\n");
+            printf("Invalid transaction type\n");
             break;
         }
     }
